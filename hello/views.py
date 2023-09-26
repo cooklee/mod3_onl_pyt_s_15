@@ -2,7 +2,7 @@ from random import randint
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from hello.models import Author, Book
+from hello.models import Author, Book, Genre
 
 
 # Create your views here.
@@ -68,15 +68,18 @@ def dodaj_autora(request):
 
 def add_book(request):
     authors = Author.objects.all()
+    genres = Genre.objects.all()
     if request.method == 'GET':
-        return render(request, 'add_book.html', {'authors':authors})
+        return render(request, 'add_book.html', {'authors':authors, 'genres':genres})
     title = request.POST['title']
     year = request.POST['year']
     author_id = request.POST['author']
+    genres = request.POST.getlist('genre')
     autor = Author.objects.get(id=author_id)
     # get -> funkcja która pobiera jeden i tylko jeden objekt z bazy jesli jest wiecej niż
     # jeden to wywali bład jeśli jest 0 to tez bład poleci
     b = Book.objects.create(title=title, year=year, author=autor)
+    b.genres.set(genres)
     return redirect('/books/')
 
 

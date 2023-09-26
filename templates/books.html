@@ -1,5 +1,6 @@
 <ul>
     {% for book in books %}
-        <li>{{ book.title }} {{ book.author.nazwisko }}</li>
+        <li>{{ book.title }} {{ book.author.nazwisko }}{% for g in book.genres.all %} <small>{{ g.name }}</small>{% endfor %}
+        </li>
     {% endfor %}
 </ul>
