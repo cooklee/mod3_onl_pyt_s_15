@@ -1,0 +1,19 @@
+<form method="get">
+    <input type="text" name="first_name" placeholder="imie">
+    <input type="text" name="last_name" placeholder="nazwisko">
+    <input type="number" name="bigger" placeholder="wieksze od">
+    <input type="number" name="smaller" placeholder="mniejsze od">
+    <input type="submit">
+</form>
+<p>{{ imie }} {{ nazwisko }} {{ od }} - {{ do }}</p>
+<ul>
+    {% for author in authors %}
+        <li>{{ author.imie }} {{ author.nazwisko }} {{ author.rok }}
+            <ul>
+                {% for book in author.napisane_ksiazki.all %}
+                    <li>{{ book.title }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>

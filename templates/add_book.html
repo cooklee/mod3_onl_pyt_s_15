@@ -1,0 +1,12 @@
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="tytuł">
+    <input type="text" name="year" placeholder="rok">
+    <select name="author">
+        {% for author in authors %}
+            <option value="{{ author.id }}">{{ author.imie }} {{ author.nazwisko }}</option>
+        {% endfor %}
+
+    </select>
+    <input type="submit">
+</form>
