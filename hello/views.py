@@ -20,6 +20,29 @@ def kosta(request, a=1, b=6):
     return render(request, 'kostka.html', context=dane)
 
 
+def kosta_get(request):
+    a = int(request.GET.get('a', 1))
+    b = int(request.GET.get('b', 6))
+    liczba = randint(a, b)
+    dane = {
+        'min': a,
+        'max': b,
+        'liczba': liczba,
+    }
+    return render(request, 'kostka.html', context=dane)
+
+
+def tabliczka_mnozenia(request,a,b):
+    tabliczka = []
+    for y in range(1, a+1):
+        row = []
+        for x in range(1, b+1):
+            row.append(x*y)
+        tabliczka.append(row)
+    return render(request, 'tabliczka.html', {'tabliczka':tabliczka})
+
+
+
 def przywitanie(request):
     if request.method == 'GET':
         return render(request, 'przywitanie.html')
